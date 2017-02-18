@@ -27,6 +27,9 @@
           style="font-size: 16px; position: fixed; top: 0; left: -10000px">')
         .appendTo('body').focus().remove()
 
+    MainScrollCont: ->
+      if utils.browser('firefox') then $('html') else $('body')
+
   $[prefix + name] = func for name, func of helpers
 
   # ---- Stateless plugins ----------------------------------------------------
@@ -243,9 +246,6 @@
 
         r[1].replaceWith r[0] for r in rpl
 
-    MainScrollCont: ->
-      if utils.browser('firefox') then $('html') else $('body')
-
     # TODO: handle when container is smaller than item
     ScrollToMe: (opts = {}) ->
       offtop = $(@)[0].offsetTop
@@ -331,7 +331,7 @@
 
       [ data, ranges ]
 
-  $.fn[prefix + name] = func for name, func in fns
+  $.fn[prefix + name] = func for name, func of fns
 
   # ---- Class based plugins --------------------------------------------------
 
